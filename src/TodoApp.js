@@ -37,18 +37,18 @@ function TodoApp({ initialTodos = [] }) {
     setTodos((todos) => todos.filter((todo) => todo.id !== id));
   }
 
-  /** New todo form saved. */
-  function handleSave(formData) {
-    create(formData);
-  }
-
   let hasTodos = todos.length > 0;
 
   return (
     <main className="TodoApp">
       <div className="row">
         <div className="col-md-6">
-          {hasTodos && <EditableTodoList />}
+          {hasTodos &&
+          <EditableTodoList
+            todos={todos}
+            update={update}
+            remove={remove}
+          />}
           {!hasTodos && <span className="text-muted">You have no todos.</span>}
         </div>
 
@@ -56,18 +56,19 @@ function TodoApp({ initialTodos = [] }) {
           {hasTodos && (
             <section className="mb-4">
               <h3>Top Todo</h3>
-              <TopTodo />
+              <TopTodo todos={todos}/>
             </section>
           )}
 
           <section>
             <h3 className="mb-3">Add Nü</h3>
             <TodoForm initialFormData={{
-          title: "",
-          description: "",
-          priority: ""
-        }}
-        handleSave={handleSave}/>
+                title: "",
+                description: "",
+                priority: 1
+              }}
+              handleSave={create}
+            />
           </section>
         </div>
       </div>
