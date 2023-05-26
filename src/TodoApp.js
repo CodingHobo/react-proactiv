@@ -27,6 +27,7 @@ function TodoApp({ initialTodos = [] }) {
 
   /** update a todo with updatedTodo */
   function update(updatedTodo) {
+    // {title, description, priority, id}
     setTodos((todos) =>
       todos.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo))
     );
